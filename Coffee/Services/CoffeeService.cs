@@ -6,6 +6,12 @@ namespace Coffee.Services
     public class CoffeeService : ICoffeeService
     {
         private static int callCounter = 0;
+        private readonly IWeatherService _weatherService;
+
+        public CoffeeService(IWeatherService weatherService)
+        {
+            _weatherService = weatherService;
+        }
 
         public CoffeeResult BrewCoffee(DateTime currentDate)
         {
@@ -23,12 +29,20 @@ namespace Coffee.Services
             {
                 return new CoffeeResult { StatusCode = 503 };
             }
-            
+
+            // Fetch the current temperature
+            var temperatureTask = _weatherService.GetCurrentTemperatureAsync();
+            temperatureTask.Wait();
+            var temperature = temperatureTask.Result;
+
+            // Prepare the message based on the temperature
+            string message = temperature > 30 ? "Your refreshing iced coffee is ready" : "Your piping hot coffee is ready";
+
             // Success response
             return new CoffeeResult
             {
                 StatusCode = 200,
-                Message = "Your piping hot coffee is ready",
+                Message = message,
                 PreparedTime = currentDate.ToString("o") // ISO 8601 format
             };
         }

@@ -1,15 +1,18 @@
 using Coffee.Interface;
 using Coffee.Services;
+using Moq;
 
 namespace Coffee.UnitTest
 {
     public class CoffeeServiceUnitTest
     {
         private ICoffeeService _coffeeService;
+        private Mock<IWeatherService> _weatherService;
 
         public CoffeeServiceUnitTest()
         {
-            _coffeeService = new CoffeeService();
+            _weatherService = new Mock<IWeatherService>();
+            _coffeeService = new CoffeeService(_weatherService.Object);
         }
 
         [Fact]
@@ -58,6 +61,41 @@ namespace Coffee.UnitTest
             Assert.False(string.IsNullOrWhiteSpace(result.PreparedTime)); // Prepared time should not be empty
         }
 
+        [Fact]
+        public void BrewCoffee_ReturnsIcedCoffeeMessage_IfTemperatureAbove30()
+        {
+            // Arrange
+            var currentDate = DateTime.UtcNow;
+
+            // Mock temperature to be above 30 degrees
+            _weatherService.Setup(ws => ws.GetCurrentTemperatureAsync()).ReturnsAsync(31);
+
+            // Act
+            var result = _coffeeService.BrewCoffee(currentDate);
+
+            // Assert
+            Assert.Equal(200, result.StatusCode);
+            Assert.Equal("Your refreshing iced coffee is ready", result.Message);
+            Assert.False(string.IsNullOrWhiteSpace(result.PreparedTime)); // Prepared time should not be empty
+        }
+
+        [Fact]
+        public void BrewCoffee_ReturnsIcedCoffeeMessage_IfTemperatureBelow30()
+        {
+            // Arrange
+            var currentDate = DateTime.UtcNow;
+
+            // Mock temperature to be above 30 degrees
+            _weatherService.Setup(ws => ws.GetCurrentTemperatureAsync()).ReturnsAsync(29);
+
+            // Act
+            var result = _coffeeService.BrewCoffee(currentDate);
+
+            // Assert
+            Assert.Equal(200, result.StatusCode);
+            Assert.Equal("Your piping hot coffee is ready", result.Message);
+            Assert.False(string.IsNullOrWhiteSpace(result.PreparedTime)); // Prepared time should not be empty
+        }
         private void ResetCallCounter()
         {
             var type = typeof(CoffeeService);
