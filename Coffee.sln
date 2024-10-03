@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coffee", "Coffee\Coffee.csproj", "{B7FB19B3-0636-46A5-B974-C3DA5B41C417}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coffee.UnitTest", "Coffee.UnitTest\Coffee.UnitTest.csproj", "{6A384CC5-73AF-46EA-BD9E-8929F6CB7D54}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7FB19B3-0636-46A5-B974-C3DA5B41C417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7FB19B3-0636-46A5-B974-C3DA5B41C417}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7FB19B3-0636-46A5-B974-C3DA5B41C417}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7FB19B3-0636-46A5-B974-C3DA5B41C417}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A384CC5-73AF-46EA-BD9E-8929F6CB7D54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A384CC5-73AF-46EA-BD9E-8929F6CB7D54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A384CC5-73AF-46EA-BD9E-8929F6CB7D54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A384CC5-73AF-46EA-BD9E-8929F6CB7D54}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
